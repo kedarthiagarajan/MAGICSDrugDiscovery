@@ -6,9 +6,9 @@ from tdc.single_pred import ADME
 from torch_geometric.utils import from_smiles
 
 def convert_dataset(dataset_name):
-"""
-    Given a dataset, convert the SMILES Drug representations to PyTorch Geometric Representations
-"""
+	"""
+	Given a dataset, convert the SMILES Drug representations to PyTorch Geometric Representations
+	"""
 	data = ADME(name = dataset_name)
 	df = data.get_data()
 	new_data = []
@@ -27,7 +27,7 @@ def main():
 	parser.add_argument('--output', help='Filename to store new pandas dataframe in')
 	args = parser.parse_args()
 	converted_dataset = convert_dataset(args.dataset_name)
-	convert_dataset.to_csv(args.output)
+	converted_dataset.to_csv(args.output)
 
-
-
+if __name__ == "__main__":
+	main()
