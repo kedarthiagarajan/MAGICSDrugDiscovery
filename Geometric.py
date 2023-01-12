@@ -2,20 +2,18 @@ import numpy as np
 import pandas
 import torch
 import argparse
-from rdkit import Chem
-from rdkit.Chem.rdmolops import GetAdjacencyMatrix
-from torch_geometric.data import Data
-from torch.utils.data import DataLoader
 from tdc.single_pred import ADME
 from torch_geometric.utils import from_smiles
 
 def convert_dataset(dataset_name):
+"""
+    Given a dataset, convert the SMILES Drug representations to PyTorch Geometric Representations
+"""
 	data = ADME(name = dataset_name)
 	df = data.get_data()
 	new_data = []
 	for index, row in df.iterrows():
 	    smile_mol = row["Drug"]
-	    print(smile_mol)
 	    atom = from_smiles(smile_mol, True)
 	    new_data.append((row["Drug_ID"], atom, row["Y"]))
 	    
